@@ -3,42 +3,28 @@
 # сами значения предикатов случайные, проверяем это утверждение 100 раз,
 # с помощью модуля time выводим на экран, сколько времени отработала программа.
 
-from random import randint
+from random import *
 import time
-
-
-def fn_or(a, b):
-    return a or b
-
-
-def fn_and(a, b):
-    return (not a) and (not b)
-
 
 try:
     startTime = time.time()
 
-    count = randint(5, 25)
+    pred = [True, False]
 
-    pred = {}
+    for counter in range(100):
+        count = randint(5, 25)
+        predicates = [choice(pred) for _ in range(count)]
 
-    pred.clear()
+        print(predicates, end=" => ")
 
-    for i in range(3):
-        for p in [True, False]:
-            pred[i] = int(p)
+        part_or = False
+        part_and = True
 
-    print(pred)
+        for i in range(count):
+            part_or = part_or or predicates[i]
+            part_and = part_and and (not predicates[i])
 
-
-    # if not (x or y or z) == (not x) and (not y) and (not z):
-    #     print('x = ', x, ', y = ', y, ', z = ', z, sep='')
-
-    # for x in [True, False]:
-    #     for y in [True, False]:
-    #         for z in [True, False]:
-    #             if not (x or y or z) == (not x) and (not y) and (not z):
-    #                 print('x = ', x, ', y = ', y, ', z = ', z, sep='')
+        print(not part_or == part_and)
 
     endTime = time.time()
     totalTime = endTime - startTime
