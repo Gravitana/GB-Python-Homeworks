@@ -7,7 +7,14 @@ from random import *
 
 
 def bot_move(max):
-    sweets = randint(1, max)
+    if sweets_all <= max:
+        sweets = max
+    elif sweets_all == max_portion * 2 + 1:
+        sweets = max_portion
+    elif sweets_all == max_portion * 2:
+        sweets = max_portion - 1
+    else:
+        sweets = randint(1, max)
     print("Я взял", sweets)
     return sweets
 
